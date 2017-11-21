@@ -14,6 +14,7 @@ public class RootLocator{
 
         writer = new PrintWriter(file);
 
+        //True root values passed into each method to calculate true relative error
         double trueRoot1 = 0.36509824, trueRoot2 = 1.9217409, trueRoot3 = 3.5631608;
 
         /***************Finding the roots of the first function***************/
@@ -134,7 +135,7 @@ public class RootLocator{
         writer.println();
     }
 
-    //Arguments (function #, guess 1, guess 2)
+    //Arguments: (function #, guess 1, guess 2)
     public static void FalsePosition(int fx, double doubleA, double doubleB, double root){
         double doubleC = 0, evalA = 0, evalB = 0, evalC = 0, prev = doubleC;
         double approximateError = 1, trueError = 1;
