@@ -1,11 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 public class RootLocator{
 
     static File file = new File("output.txt");
     static PrintWriter writer;
+
+    static DecimalFormat decimalFormat = new DecimalFormat("#.####");
 
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -87,8 +90,10 @@ public class RootLocator{
             evalB = evaluate(fx, false, doubleB);
             evalC = evaluate(fx, false, doubleC);
 
-            writer.printf("%-5d %-10f %-10f %-10f %-10f %-10f %-10f %-10f %-10f\n",
-                    iteration++, doubleA, doubleB, doubleC, evalA, evalB, evalC, approximateError, trueError);
+            writer.printf("%-5d %-10f %-10f %-10f %-10s %-10s %-10s %-10f %-10f\n",
+                    iteration++, doubleA, doubleB, doubleC,
+                    decimalFormat.format(evalA), decimalFormat.format(evalB), decimalFormat.format(evalC),
+                    approximateError, trueError);
 
             if((evalA >= 0 && evalC >= 0) || (evalA < 0 && evalC < 0)){
                 doubleA = doubleC;
@@ -118,8 +123,10 @@ public class RootLocator{
             approximateError = Math.abs((doubleVariableNext - doubleVariableX) / doubleVariableNext);
             trueError = Math.abs((root - doubleVariableNext) / root);
 
-            writer.printf("%-5d %-10f %-10f %-10f %-10f %-10f %-10f\n",
-                    iteration++, doubleVariableX, doubleVariableNext, evalFx, eval_dFx, approximateError, trueError);
+            writer.printf("%-5d %-10f %-10f %-10s %-10s %-10f %-10f\n",
+                    iteration++, doubleVariableX, doubleVariableNext,
+                    decimalFormat.format(evalFx), decimalFormat.format(eval_dFx),
+                    approximateError, trueError);
 
             doubleVariableX = doubleVariableNext;
         }
@@ -146,8 +153,10 @@ public class RootLocator{
             approximateError = Math.abs((doubleC - prev) / doubleC);
             trueError = Math.abs((root - doubleC) / root);
 
-            writer.printf("%-5d %-10f %-10f %-10f %-10f %-10f %-10f %-10f %-10f\n",
-                    iteration++, doubleA, doubleB, doubleC, evalA, evalB, evalC, approximateError, trueError);
+            writer.printf("%-5d %-10f %-10f %-10f %-10s %-10s %-10s %-10f %-10f\n",
+                    iteration++, doubleA, doubleB, doubleC,
+                    decimalFormat.format(evalA), decimalFormat.format(evalB), decimalFormat.format(evalC),
+                    approximateError, trueError);
 
             if((evalA >= 0 && evalC >= 0) || (evalA < 0 && evalC < 0)){
                 doubleA = doubleC;
@@ -178,8 +187,10 @@ public class RootLocator{
             approximateError = Math.abs((x1 - x0) / x1);
             trueError = Math.abs((root - x2) / root);
 
-            writer.printf("%-5d %-10f %-10f %-10f %-10f %-10f %-10f %-10f %-10f\n",
-                    iteration++, x0, x1, x2, evalX0, evalX1, evalX2, approximateError, trueError);
+            writer.printf("%-5d %-10f %-10f %-10f %-10s %-10s %-10s %-10f %-10f\n",
+                    iteration++, x0, x1, x2,
+                    decimalFormat.format(evalX0), decimalFormat.format(evalX1), decimalFormat.format(evalX2),
+                    approximateError, trueError);
 
             x0 = x1;
             x1 = x2;
@@ -207,8 +218,10 @@ public class RootLocator{
             approximateError = Math.abs((x1 - x) / x1);
             trueError = Math.abs((root - x1) / root);
 
-            writer.printf("%-5d %-10f %-10f %-10f %-10f %-10f %-10f %-10f\n",
-                    iteration++, x, deltaX, x1, evalX, evalDx, approximateError, trueError);
+            writer.printf("%-5d %-10f %-10f %-10f %-10s %-10s %-10f %-10f\n",
+                    iteration++, x, deltaX, x1,
+                    decimalFormat.format(evalX), decimalFormat.format(evalDx),
+                    approximateError, trueError);
 
             x = x1;
         }
